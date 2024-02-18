@@ -13,8 +13,8 @@
 **User Stories**
 - As a user I want to be able to rate my current mood on a scale from 1-10 at the beginning and end of the day
 - As a user I want to receive a list of potential tasks that may help improve my mood and add things to this list that I feel may personally help me
-- As a user I want to select tasks that I have completed in the day and receive a summarized list of these completed tasks at the end of the day
-- As a user I want to receive a weekly summary of my mood, and tasks that best improved my mood
+- As a user I want to input tasks that I have completed in the day
+- As a user I want to receive a summary of my mood, and the tasks completed that improved my mood
 
 
 
