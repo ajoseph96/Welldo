@@ -8,7 +8,7 @@
 - Will ask and remember current mood at the start of the day (user will likely provide a numerical score on mood from (1-10). Application can offer preset mood selections, e.g. what are you feeling today? (Sad, angry etc.)
 - Based on numerical score application can offer specific suggestions for tasks designed to improve mood; user will also be able to add tasks that they feel help them best that app can also remember and suggest once added.
 - Will ask for mood at the end of the day and ask what tasks, if any, were completed.
-- Provide weekly summary on tasks completed and based on numerical mood score changes state which tasks seemed to help the most. This ultimately provides individualized suggestions for the user to take with them and apply the following week. 
+- Provide summary on tasks completed and based on numerical mood score changes state which tasks seemed to help the most. This ultimately provides individualized suggestions for the user to take with them and apply later on. 
 
 **User Stories**
 - As a user I want to be able to rate my current mood on a scale from 1-10 at the beginning and end of the day
