@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class ModelTest {
     private HappyTasks happyTest;
     private SadTasks sadTest;
+
+    private CompletedTasks completeTest;
+    private AngryTasks angryTest;
     private MoodScore moodTest;
 
     @BeforeEach
@@ -16,13 +19,20 @@ class ModelTest {
         happyTest = new HappyTasks();
         moodTest = new MoodScore();
         sadTest = new SadTasks();
+        completeTest = new CompletedTasks();
+        angryTest = new AngryTasks();
     }
 
     //happy, sad and angrytasks subclasses all start with a suggested task as the first item in their task list.
+    //CompletedTasks subclass begins with an empty list
     @Test
     void testAddTaskListSingle() {
         sadTest.addTaskList("cycling");
         assertEquals("cycling", (sadTest.getTaskList()).get(1));
+        angryTest.addTaskList("boxing");
+        assertEquals("boxing", (angryTest.getTaskList()).get(1));
+        completeTest.addTaskList("boxing");
+        assertEquals("boxing", (completeTest.getTaskList()).get(0));
 
     }
 
