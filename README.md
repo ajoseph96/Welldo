@@ -19,7 +19,7 @@ Phase 1:
 
 Phase 2: 
 - As a user I would like the option for my inputted mood tasks to be saved.
-- As a user I would like the option for my data from the previous day to be loaded. 
+- As a user I would like the option for my data entered into task lists previously to be loaded. 
 
 
 
