@@ -1,11 +1,19 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.IOException;
 
 //represents the UI of the application
 public class Welldo {
+    private static String JSON_STORE;
+
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     private MoodScore mood;
 
@@ -21,12 +29,13 @@ public class Welldo {
     private CompletedTasks completed;
 
     // EFFECTS: constructor for Welldo class, creates initial fields and calls runWelldo() method.
-    public Welldo() {
+    public Welldo() throws FileNotFoundException {
 
         sad = new SadTasks();
         happy = new HappyTasks();
         angry = new AngryTasks();
         completed = new CompletedTasks();
+
 
         runWelldo();
 
@@ -87,22 +96,32 @@ public class Welldo {
     //REQUIRES: emotional input from takeInstruction() method
     //MODIFIES: this
     // EFFECTS: provides list of helpful tasks based on emotional input from takeInstruction method.
+    @SuppressWarnings("methodlength")
     public void moodNavigator(String s) {
 
         if (s.equals("s")) {
             System.out.println("I see you are feeling sad, lets see if we can help manage these difficult feelings, ");
             System.out.println("in these cases here are some tasks we suggest:");
+            JSON_STORE = "./data/sadTasks.json";
+            jsonWriter = new JsonWriter(JSON_STORE);
+            jsonReader = new JsonReader(JSON_STORE);
             System.out.println(sad.getTaskList());
             taskAdder(sad);
         } else if (s.equals("h")) {
             System.out.println("I see you are feeling happy, I'm so glad,");
             System.out.println("in these cases here are some tasks we suggest to help maintain this mood:");
             System.out.println(happy.getTaskList());
+            JSON_STORE = "./data/happyTasks.json";
+            jsonWriter = new JsonWriter(JSON_STORE);
+            jsonReader = new JsonReader(JSON_STORE);
             taskAdder(happy);
         } else if (s.equals("a")) {
             System.out.println("I see you are feeling angry, lets see if we can help manage these difficult feelings");
             System.out.println("in these cases here are some tasks we suggest:");
             System.out.println(angry.getTaskList());
+            JSON_STORE = "./data/angryTasks.json";
+            jsonWriter = new JsonWriter(JSON_STORE);
+            jsonReader = new JsonReader(JSON_STORE);
             taskAdder(angry);
         } else {
             System.out.println("Selection not valid...please restart!");
@@ -113,12 +132,14 @@ public class Welldo {
 
     //REQUIRES: emotional input from moodNavigator()
     //MODIFIES: this
-    // EFFECTS: allows user to add additional tasks to emotion specific task lists and prints them out for review
+    // EFFECTS: allows user to add tasks to emotion specific task lists, save them and prints them out for review
     @SuppressWarnings("methodlength")
     public void taskAdder(Tasks t) {
         System.out.println("\nI understand that these choices are fairly limited. Based on your selected emotion");
         System.out.println("is there another task you find helps you most during these times?");
         System.out.println("If you would like to add a task please enter a (for add).");
+        System.out.println("If you would like to load a previous task list please enter l (for load).");
+        System.out.println("You cannot add new tasks if load is selected.");
         System.out.println("If you are not interested in adding any please enter p (for pass).");
         stringInstruction = insert.nextLine();
         if (stringInstruction.equals("a")) {
@@ -130,6 +151,11 @@ public class Welldo {
                 if (stringInstruction.equals("p")) {
                     addTasks = false;
                     System.out.println("No additional tasks to add at this time.");
+                    System.out.println("Would you like to save these added tasks?");
+                    completedTasks();
+                } else if (stringInstruction.equals("s")) {
+                    saveTasks(t);
+                    System.out.println("Task saved!");
                     completedTasks();
                 } else {
                     t.addTaskList(stringInstruction);
@@ -137,12 +163,18 @@ public class Welldo {
                     System.out.println("based on your previously selected emotion.");
                     System.out.println(t.getTaskList());
                     System.out.println("To add another task enter it below,");
-                    System.out.println("otherwise please enter p (for pass)/to move to the next step.");
+                    System.out.println("otherwise please enter s (for save)/to permanently add these tasks");
+                    System.out.println("or please enter p (for pass)/to move to the next step.");
                 }
             }
         }
         if (stringInstruction.equals("p")) {
             System.out.println("No task to add at this time.");
+            completedTasks();
+        } else if (stringInstruction.equals("l")) {
+            Tasks newt;
+            newt = loadWorkRoom(t);
+            System.out.println(newt.getTaskList());
             completedTasks();
         } else {
             System.out.println("Selection not valid...please restart!");
@@ -235,6 +267,31 @@ public class Welldo {
             System.exit(0);
         }
 
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveTasks(Tasks t) {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(t);
+            jsonWriter.close();
+            System.out.println("Saved " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads tasks from file
+    private Tasks loadWorkRoom(Tasks ta) {
+        try {
+            ta = jsonReader.read();
+            System.out.println("Loaded " + " from " + JSON_STORE);
+            return ta;
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+        return ta;
     }
 
 }
