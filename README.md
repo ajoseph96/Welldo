@@ -11,6 +11,7 @@
 - Provide summary on tasks completed and based on numerical mood score changes state which tasks seemed to help the most. This ultimately provides individualized suggestions for the user to take with them and apply later on. 
 
 **User Stories**
+
 Phase 1:
 - As a user I want to be able to rate my current mood on a scale from 1-10 at the beginning and end of the day
 - As a user I want to receive a list of potential tasks that may help improve my mood and add things to this list that I feel may personally help me
