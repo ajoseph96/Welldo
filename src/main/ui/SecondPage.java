@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 
+//Second ui screen
 public class SecondPage extends JFrame implements ActionListener {
 
     JLabel label = new JLabel();

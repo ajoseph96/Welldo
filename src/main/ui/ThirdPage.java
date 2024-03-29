@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Third ui screen
 public class ThirdPage extends JFrame implements ActionListener {
 
     JLabel label = new JLabel();

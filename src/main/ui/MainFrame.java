@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 
+//initial menu, seen when starting program with app logo.
 public class MainFrame extends JFrame implements ActionListener {
     JLabel label = new JLabel();
     JButton button = new JButton();
