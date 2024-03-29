@@ -8,7 +8,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
 
+
 //represents the UI of the application
+
 public class Welldo {
     private static String JSON_STORE;
 
@@ -28,6 +30,7 @@ public class Welldo {
     private AngryTasks angry;
     private CompletedTasks completed;
 
+
     // EFFECTS: constructor for Welldo class, creates initial fields and calls runWelldo() method.
     public Welldo() throws FileNotFoundException {
 
@@ -35,8 +38,6 @@ public class Welldo {
         happy = new HappyTasks();
         angry = new AngryTasks();
         completed = new CompletedTasks();
-
-
         runWelldo();
 
 
