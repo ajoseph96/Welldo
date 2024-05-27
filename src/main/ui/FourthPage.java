@@ -2,19 +2,20 @@ package ui;
 
 
 import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 //Fourth ui screen
-public class FourthPage extends JFrame implements ActionListener {
+public class FourthPage extends JFrame implements ActionListener, WindowListener {
 
     JLabel label = new JLabel();
 
@@ -56,7 +57,8 @@ public class FourthPage extends JFrame implements ActionListener {
         buttonSetup();
         emotionSelectorLabel(s);
         this.setSize(2000, 1000); //sets dimension of window
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(this);
         label2.setText("I understand that these choices are fairly limited. Based on your selected emotion"
                 + " is there another task you find helps you most during these times?");
         label3.setText(" If you would like to add a task please type the task in the textbox and click the add button."
@@ -177,7 +179,7 @@ public class FourthPage extends JFrame implements ActionListener {
                 removeButton.setEnabled(false);
             } else {
                 removeButton.setEnabled(true);
-                emotionSelectorList().getTaskList().remove((listSize - 1));
+                emotionSelectorList().removeTaskList((listSize - 1));
                 label.setText("Here are your updated suggested tasks: " + emotionSelectorList().getTaskList());
             }
         } else if (e.getSource() == saveButton) {
@@ -191,5 +193,46 @@ public class FourthPage extends JFrame implements ActionListener {
             new FifthPage(initialMood);
             this.dispose();
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    //EFFECTS: closes frame and prints Event Log in console.
+    @Override
+    public void windowClosing(WindowEvent e) {
+        Iterator<Event> it = EventLog.getInstance().iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+        this.dispose();
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

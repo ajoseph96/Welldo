@@ -27,6 +27,14 @@ public class Tasks implements Writable {
     // EFFECTS: adds task to task list
     public void addTaskList(String s) {
         taskList.add(s);
+        EventLog.getInstance().logEvent(new Event("task " + s + " added to list"));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes specific task from task list
+    public void removeTaskList(int n) {
+        taskList.remove(n);
+        EventLog.getInstance().logEvent(new Event("last added task removed from list"));
     }
 
     // EFFECTS: returns size of task list

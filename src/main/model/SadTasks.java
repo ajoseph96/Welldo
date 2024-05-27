@@ -11,5 +11,4 @@ public class SadTasks extends Tasks {
         super();
         taskList.add("journaling");
     }
-
 }

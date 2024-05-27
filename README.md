@@ -26,12 +26,10 @@ Phase 3:
 - As a user I would like the option to add multiple Tasks to a Task List, and be able to remove these tasks as well.
 - As a user I would like the option for my data entered into mood task lists previously to be saved and loaded.
 
-# Instructions for Grader
+# Extra Notes
 
 - You can generate the first required action related to the user story "add multiple Tasks to a Task List" by selecting the "add" button in the fourth menu screen.
 - You can generate the second required action related to the user story "add multiple Tasks to a Task List" by selecting the "remove" button to remove the added task.
 - You can locate my visual component by starting the program and viewing the image present on first screen (MainFrame). 
 - You can save the state of my application by saving a list of tasks by selecting the "save" button in the fourth menu screen.
 - You can reload the state of my application by loading a list of tasks saved previously by selecting the "load button" in the fourth menu screen.
-
-

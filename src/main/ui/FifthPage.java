@@ -1,15 +1,20 @@
 package ui;
 
 import model.CompletedTasks;
+import model.Event;
+import model.EventLog;
 import model.MoodScore;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.Iterator;
 
 //Fifth ui screen
-public class FifthPage extends JFrame implements ActionListener {
+public class FifthPage extends JFrame implements ActionListener, WindowListener {
 
     JLabel label = new JLabel();
     JButton nextButton = new JButton();
@@ -22,12 +27,14 @@ public class FifthPage extends JFrame implements ActionListener {
     CompletedTasks completed;
 
     // EFFECTS: constructor for  FifthPage, creates initial frame with colour and buttons etc.
+    @SuppressWarnings("methodlength")
     public FifthPage(int n) {
         completed = new CompletedTasks();
         mood = new MoodScore();
         mood.setInitialMoodNum(n);
         this.setSize(2000, 1000); //sets dimension of window
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(this);
         label.setText("Did you complete any of the previously mentioned tasks today? If so type the tasks in the"
                 + " in the textbox and click add, otherwise click next");
         this.getContentPane().setBackground(new Color(0x5B96A9));
@@ -92,5 +99,46 @@ public class FifthPage extends JFrame implements ActionListener {
                     + " today was just a tougher day, regardless I am so proud you tried your best."
                     + " There is always tomorrow, I'll see you then!");
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    //EFFECTS: closes frame and prints Event Log in console.
+    @Override
+    public void windowClosing(WindowEvent e) {
+        Iterator<Event> it = EventLog.getInstance().iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+        this.dispose();
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }
